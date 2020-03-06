@@ -1,0 +1,4 @@
+zalo:
+   client_id: 3957546726206149895
+   client_secret: xBuX2TYk0F321Q7G7Yex
+   redirect_url: https://www.localhost:4200/callback/zalo
