@@ -1,0 +1,105 @@
+<app-header [navbarBrandRouterLink]="['/']" [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 80, height: 40, alt: 'BYCN Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.svg', width: 30, height: 30, alt: 'BYCN Logo'}"
+  [sidebarToggler]="'lg'" [asideMenuToggler]="false" [mobileAsideMenuToggler]="false">
+  <ul class="nav navbar-nav ml-auto mr-2">
+    <li>
+      <p-dropdown (onChange)="useLanguage($event)" [options]="langs" [(ngModel)]="currentLang" styleClass="lang mr-2">
+      </p-dropdown>
+    </li>
+    <!-- <button class="btn btn-link px-0">
+      <i class="c-icon icon-info"></i>
+      <span *ngIf="!mobileQuery.matches" class="ml-1" translate>Manual</span>
+    </button> -->
+    <li>
+      <ng-container [ngSwitch]="!!authenticationUser.bycnId">
+        <a *ngSwitchCase="true" href="https://itbox.bouygues-construction.com/incident.php?CI=portail%20partenaires"
+          target="_blank" rel="noopener" class="btn btn-link px-0 mx-2">
+          <i class="c-icon icon-question"></i>
+          <span *ngIf="!mobileQuery.matches" class="ml-1" translate>Incident</span>
+        </a>
+        <!-- <button *ngSwitchDefault (click)="onShowIncidentDialog()" class="btn btn-link px-0">
+        <i class="c-icon icon-question"></i>
+        <span *ngIf="!mobileQuery.matches" class="ml-1" translate>Incident</span>
+      </button> -->
+      </ng-container>
+    </li>
+    <li>
+      <button (click)="onShowUpdateAccountDialog()" class="btn btn-link px-0 mx-2">
+        <i class="c-icon cil-user"></i>
+        <span *ngIf="!mobileQuery.matches" class="ml-1">{{ authenticationUser.lastname }}
+          {{ authenticationUser.firstname }}</span>
+      </button>
+    </li>
+    <li>
+      <button (click)="onLogout()" [title]="'Logout' | translate" class="btn btn-link logout px-0 mx-1"><i
+          class="c-icon cil-power-standby"></i></button>
+    </li>
+  </ul>
+</app-header>
+<div class="app-body">
+  <app-sidebar [fixed]="true" [display]="'lg'">
+    <app-sidebar-nav #sidebarNav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized">
+    </app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <div [perfectScrollbar] class="position-relative">
+      <!-- Breadcrumb -->
+      <app-breadcrumb>
+        <li class="breadcrumb-menu">
+          <ng-container [ngSwitch]="activatedComponent">
+            <ng-container *ngSwitchCase="'ServicexComponent'">
+              <ng-container
+                *ngIf="['SERVICE_MANAGING_ADMIN', 'APPLICATION_MANAGING_ADMIN', 'GENERAL_ADMIN'].includes(authenticationUser.highestUserRole)">
+                <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
+                  [title]="'Create a new service' | translate" class="clr clr-sm ml-2"></button>
+                <button (click)="export()" pButton type="button" icon="c-icon cil-cloud-download"
+                  [label]="'Export' | translate"
+                  [title]="'Export the list of services and their billing information' | translate"
+                  class="clr clr-sm ml-2"></button>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'UserComponent'">
+              <ng-container
+                *ngIf="['SERVICE_ADMIN', 'SERVICE_MANAGING_ADMIN', 'APPLICATION_MANAGING_ADMIN', 'GENERAL_ADMIN'].includes(authenticationUser.highestUserRole)">
+                <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
+                  [title]="'Create a new user' | translate" class="clr clr-sm ml-2"></button>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'MessageComponent'">
+              <ng-container
+                *ngIf="['APPLICATION_MANAGING_ADMIN', 'GENERAL_ADMIN'].includes(authenticationUser.highestUserRole)">
+                <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
+                  [title]="'Create a new message' | translate" class="clr clr-sm ml-2"></button>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </li>
+      </app-breadcrumb>
+      <!-- Breadcrumb Menu-->
+      <div class="container-fluid">
+        <router-outlet (activate)="onActive($event)"></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>
+<app-footer [fixed]="true">
+  <div class="d-flex flex-grow-1 justify-content-between">
+    <a href="{{environment.serverUrl}}/terms-of-use" target="_blank" rel="noopener">{{ 'Terms of use' | translate }}</a>
+    <span title="{{environment.version}}"><a href="#">BCC Portal</a> &copy; 2019 BYCNIT.</span>
+  </div>
+</app-footer>
+<p-confirmDialog #cd icon="c-icon cil-warning">
+  <p-footer>
+    <div class="d-flex flex-column flex-sm-row justify-content-sm-end">
+      <button pButton type="button" icon="c-icon cil-x" [label]="'No' | translate" (click)="cd.reject()"
+        class="clr mb-2 mb-sm-0 mr-0 mr-sm-2"></button>
+      <button pButton type="button" icon="c-icon cil-check-alt" [label]="'Yes' | translate" (click)="cd.accept()"
+        class="clr ui-button-primary"></button>
+    </div>
+  </p-footer>
+</p-confirmDialog>
+<ngx-spinner bdColor="rgba(151,151,151,0.2)" size="default" color="rgba(232,91,44,0.9)" type="ball-8bits"
+  [fullScreen]="true"></ngx-spinner>

@@ -1,0 +1,21 @@
+<app-header [navbarBrandRouterLink]="['/']" [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 80, height: 40, alt: 'BYCN Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.svg', width: 30, height: 30, alt: 'BYCN Logo'}"
+  [navbarBrandText]="'Bouygues Construction Connect'" [sidebarToggler]="false" [mobileSidebarToggler]="false"
+  [asideMenuToggler]="false" [mobileAsideMenuToggler]="false">
+  <ul class="nav navbar-nav ml-auto">
+    <p-dropdown (onChange)="useLanguage($event)" [options]="langs" [(ngModel)]="currentLang" styleClass="lang mr-2">
+    </p-dropdown>
+  </ul>
+</app-header>
+<div class="app-body">
+  <!-- Main content -->
+  <main class="main">
+    <div [perfectScrollbar] class="position-relative">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+<p-toast></p-toast>
+<ngx-spinner bdColor="rgba(151,151,151,0.2)" size="default" color="rgba(232,91,44,0.9)" type="ball-8bits"
+  [fullScreen]="true"></ngx-spinner>

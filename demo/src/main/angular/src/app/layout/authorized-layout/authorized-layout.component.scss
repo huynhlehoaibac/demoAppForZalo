@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 105px);
+}
+
+.btn.logout {
+  color: #dc3545;
+
+  &:hover {
+    color: #bd2130;
+  }
+}

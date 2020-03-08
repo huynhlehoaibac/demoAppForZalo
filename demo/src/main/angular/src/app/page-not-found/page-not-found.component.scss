@@ -1,0 +1,26 @@
+h1 {
+  color: #ffa34f;
+}
+
+.pnf {
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .pnf {
+    width: 400px;
+  }
+}
+
+.text-icon {
+  flex: 0 0 100px;
+  font-size: 100px;
+  font-weight: 600;
+  line-height: 63px;
+  letter-spacing: 5px;
+  height: 100%;
+  color: #ff8c00;
+  text-shadow: 1px 0px 1px #ccc, 0px 1px 1px #eee, 2px 1px 1px #ccc,
+    1px 2px 1px #eee, 3px 2px 1px #ccc, 2px 3px 1px #eee, 4px 3px 1px #ccc,
+    3px 4px 1px #eee;
+}

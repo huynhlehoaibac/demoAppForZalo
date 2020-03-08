@@ -1,0 +1,151 @@
+<p-table #dt [columns]="cols" [value]="customers" [lazy]="true" (onLazyLoad)="loadLazy($event)" [lazyLoadOnInit]="false"
+  sortMode="multiple" [multiSortMeta]="defaultMultiSortMeta" [paginator]="true" [rowsPerPageOptions]="[10, 20, 50]"
+  [rows]="10" paginatorDropdownAppendTo="body" [totalRecords]="totalRecords" [responsive]="true" styleClass="mb-4">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+        <th *ngSwitchCase="'filter'" rowspan="2" class="p-0 text-40em-center" [width]="col.width">
+          <button (click)="onResetTable()" [title]="'Reset filters' | translate" class="btn">
+            <span class="c-icon fas fa-eraser"></span>
+          </button>
+        </th>
+        <th *ngSwitchDefault [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.sortableColumnDisabled"
+          [attr.rowspan]="col.rowspan" class="text-40em-center" [width]="col.width">
+          {{ col.header | translate }}
+          <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+        </th>
+      </ng-container>
+    </tr>
+    <tr class="ui-fluid">
+      <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+        <ng-container *ngSwitchCase="'filter'">
+        </ng-container>
+        <th *ngSwitchCase="'lastname'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedLastname">
+        </th>
+        <th *ngSwitchCase="'firstname'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedFirstname">
+        </th>
+        <th *ngSwitchCase="'companyName'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedCompanyName">
+        </th>
+        <th *ngSwitchCase="'emailAddress'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedEmailAddress">
+        </th>
+        <th *ngSwitchCase="'customerType'">
+          <p-dropdown [options]="customerTypes" (onChange)="dt.filter($event.value, col.field, 'equals')"
+            [(ngModel)]="selectedCustomerType" appendTo="body">
+          </p-dropdown>
+        </th>
+        <th *ngSwitchCase="'active'">
+          <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, col.field, 'equals')"
+            [(ngModel)]="selectedStatus" appendTo="body">
+          </p-dropdown>
+        </th>
+        <th *ngSwitchCase="'highestCustomerRole'">
+          <p-dropdown [options]="customerRoles" (onChange)="dt.filter($event.value, col.field, 'equals')"
+            [(ngModel)]="selectedCustomerRole" scrollHeight="217px" appendTo="body">
+          </p-dropdown>
+        </th>
+        <ng-container *ngSwitchCase="'action'">
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <th></th>
+        </ng-container>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+        <td *ngSwitchCase="'filter'" class="d-40em-down-none"></td>
+        <td *ngSwitchCase="'lastname'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <a (click)="onShowUpdateCustomerDialog(rowData)" [title]="rowData[col.field]"
+            href="javascript:void(0)">{{ rowData[col.field] }}</a>
+        </td>
+        <td *ngSwitchCase="'firstname'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <a (click)="onShowUpdateCustomerDialog(rowData)" [title]="rowData[col.field]"
+            href="javascript:void(0)">{{ rowData[col.field] }}</a>
+        </td>
+        <td *ngSwitchCase="'emailAddress'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <span [title]="rowData[col.field]">{{ rowData[col.field] }}</span>
+        </td>
+        <td *ngSwitchCase="'customerType'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <ng-container [ngSwitch]="rowData[col.field]">
+            <ng-container *ngSwitchCase="1"><span class="badge badge-primary">{{ 'Internal' |  translate }}</span>
+            </ng-container>
+            <ng-container *ngSwitchCase="0"><span class="badge badge-warning">{{ 'External' |  translate }}</span>
+            </ng-container>
+          </ng-container>
+        </td>
+        <td *ngSwitchCase="'highestCustomerRole'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <ng-container [ngSwitch]="rowData[col.field]">
+            <span *ngSwitchCase="'PARTNER'" [title]="'Partner' | translate" [innerText]="'Partner' | translate"></span>
+            <span *ngSwitchCase="'STANDARD_CUSTOMER'" [title]="'Standard customer' | translate"
+              [innerText]="'Standard customer' | translate"></span>
+            <span *ngSwitchCase="'SERVICE_ADMIN'" [title]="'Service admin' | translate"
+              [innerText]="'Service admin' | translate"></span>
+            <span *ngSwitchCase="'SERVICE_MANAGING_ADMIN'" [title]="'Service managing admin' | translate"
+              [innerText]="'Service managing admin' | translate">
+            </span>
+            <span *ngSwitchCase="'APPLICATION_MANAGING_ADMIN'" [title]="'Application managing admin' | translate"
+              [innerText]="'Application managing admin' | translate">
+            </span>
+            <span *ngSwitchCase="'GENERAL_ADMIN'" [title]="'General admin' | translate"
+              [innerText]="'General admin' | translate"></span>
+          </ng-container>
+        </td>
+        <td *ngSwitchCase="'action'" class="text-40em-right">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <ng-container
+            *ngIf="['GENERAL_ADMIN'].includes(authenticationCustomer.highestCustomerRole) && rowData.customerId !== authenticationCustomer.customerId">
+            <span class="divider">
+              <button (click)="onDeleteCustomer(rowData)" [title]="'Delete the customer' | translate"
+                class="btn btn-icon btn-icon-danger">
+                <i class="c-icon cil-trash"></i>
+              </button>
+            </span>
+          </ng-container>
+        </td>
+        <td *ngSwitchDefault class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <span [title]="rowData[col.field]">{{ rowData[col.field] }}</span>
+        </td>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length">
+        {{ 'No records found.' | translate }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog #cd icon="c-icon cil-warning">
+  <p-footer>
+    <div class="d-flex flex-column flex-sm-row justify-content-sm-end">
+      <button pButton type="button" icon="c-icon cil-x" [label]="'No' | translate" (click)="cd.reject()"
+        class="clr mb-2 mb-sm-0 mr-0 mr-sm-2"></button>
+      <button pButton type="button" icon="c-icon cil-check-alt" [label]="'Yes' | translate" (click)="cd.accept()"
+        class="clr ui-button-primary"></button>
+    </div>
+  </p-footer>
+</p-confirmDialog>
+<p-confirmDialog #alert key="alert" icon="c-icon cil-warning">
+  <p-footer>
+    <div class="d-flex flex-column flex-sm-row justify-content-sm-end">
+      <button *ngIf="cd.rejectVisible" pButton type="button" icon="c-icon cil-check-alt" [label]="'OK' | translate"
+        (click)="alert.close($event)" class="clr mb-2 mb-sm-0"></button>
+    </div>
+  </p-footer>
+</p-confirmDialog>
