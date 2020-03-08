@@ -1,4 +1,42 @@
-zalo:
-   client_id: 3957546726206149895
-   client_secret: xBuX2TYk0F321Q7G7Yex
-   redirect_url: https://www.localhost:4200/callback/zalo
+spring:
+   profiles.active: dev
+   datasource:
+      url: jdbc:h2:mem:testdb
+      driverClassName: org.h2.Driver
+      username: sa
+      password: 
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+   security.oauth2.client:
+      registration.zalo:
+         client-id: 3957546726206149895
+         client-secret: xBuX2TYk0F321Q7G7Yex
+         client-authentication-method: basic
+         authorization-grant-type: authorization_code
+         redirect-uri: https://localhost:8080/oauth2/callback/zalo
+      provider.zalo:
+         authorization-uri: https://oauth.zaloapp.com/v3/permission
+         token-uri: https://oauth.zaloapp.com/v3/access_token
+#         jwk-set-uri
+         user-info-uri: https://graph.zalo.me/v2.0/me
+#         user-info-authentication-method
+         user-name-attribute: id
+
+# h2-db
+spring.h2.console.enabled: true
+
+# enable https
+server.ssl:
+   key-store-type: PKCS12
+   key-store: classpath:keystore/hoaibac.p12
+   key-store-password: lXJdOfhF
+   key-alias: hoaibac
+
+security.require-ssl: true
+
+demo.security.jwt:
+   tokenExpirationTime: 120
+   tokenIssuer: PA
+   tokenSigningKey: Iq0ClTU9zJ
+   refreshTokenExpTime: 1440
+
+frontend.login-callback.url: https://localhost:4200/callback/zalo
