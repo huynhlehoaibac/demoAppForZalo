@@ -194,27 +194,6 @@ export class CustomerListComponent implements OnInit, OnDestroy {
         sortableColumnDisabled: true
       }
     ];
-    // toggle columns
-    if (
-      ![
-        'SERVICE_MANAGING_ADMIN',
-        'APPLICATION_MANAGING_ADMIN',
-        'GENERAL_ADMIN'
-      ].includes(this.authenticationCustomer.highestCustomerRole)
-    ) {
-      defaultCols = defaultCols.filter(
-        col => !['active', 'assCustomerServiceCount'].includes(col.field)
-      );
-      if (
-        !['SERVICE_ADMIN'].includes(
-          this.authenticationCustomer.highestCustomerRole
-        )
-      ) {
-        defaultCols = defaultCols.filter(
-          col => !['action'].includes(col.field)
-        );
-      }
-    }
 
     this.cols = defaultCols;
   }

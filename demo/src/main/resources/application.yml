@@ -5,7 +5,9 @@ spring:
       driverClassName: org.h2.Driver
       username: sa
       password: 
-      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+      spring.jpa:
+         database-platform: org.hibernate.dialect.H2Dialect
+         hibernate.ddl-auto: update
    security.oauth2.client:
       registration.zalo:
          client-id: 3957546726206149895

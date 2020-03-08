@@ -86,35 +86,24 @@
             </ng-container>
           </ng-container>
         </td>
-        <td *ngSwitchCase="'highestCustomerRole'" class="text-truncate">
+        <td *ngSwitchCase="'customerType'" class="text-truncate">
           <span class="ui-column-title">{{ col.header | translate }}</span>
           <ng-container [ngSwitch]="rowData[col.field]">
-            <span *ngSwitchCase="'PARTNER'" [title]="'Partner' | translate" [innerText]="'Partner' | translate"></span>
-            <span *ngSwitchCase="'STANDARD_CUSTOMER'" [title]="'Standard customer' | translate"
-              [innerText]="'Standard customer' | translate"></span>
-            <span *ngSwitchCase="'SERVICE_ADMIN'" [title]="'Service admin' | translate"
-              [innerText]="'Service admin' | translate"></span>
-            <span *ngSwitchCase="'SERVICE_MANAGING_ADMIN'" [title]="'Service managing admin' | translate"
-              [innerText]="'Service managing admin' | translate">
+            <span *ngSwitchCase="'A'" [title]="'Vip' | translate" [innerText]="'Vip' | translate"></span>
+            <span *ngSwitchCase="'B'" [title]="'Regular' | translate" [innerText]="'Regular' | translate"></span>
+            <span *ngSwitchCase="'C'" [title]="'Standard' | translate" [innerText]="'Standard' | translate"></span>
+            <span *ngSwitchCase="'D'" [title]="'New' | translate" [innerText]="'New' | translate">
             </span>
-            <span *ngSwitchCase="'APPLICATION_MANAGING_ADMIN'" [title]="'Application managing admin' | translate"
-              [innerText]="'Application managing admin' | translate">
-            </span>
-            <span *ngSwitchCase="'GENERAL_ADMIN'" [title]="'General admin' | translate"
-              [innerText]="'General admin' | translate"></span>
           </ng-container>
         </td>
         <td *ngSwitchCase="'action'" class="text-40em-right">
           <span class="ui-column-title">{{ col.header | translate }}</span>
-          <ng-container
-            *ngIf="['GENERAL_ADMIN'].includes(authenticationCustomer.highestCustomerRole) && rowData.customerId !== authenticationCustomer.customerId">
-            <span class="divider">
-              <button (click)="onDeleteCustomer(rowData)" [title]="'Delete the customer' | translate"
-                class="btn btn-icon btn-icon-danger">
-                <i class="c-icon cil-trash"></i>
-              </button>
-            </span>
-          </ng-container>
+          <span class="divider">
+            <button (click)="onDeleteCustomer(rowData)" [title]="'Delete the customer' | translate"
+              class="btn btn-icon btn-icon-danger">
+              <i class="c-icon cil-trash"></i>
+            </button>
+          </span>
         </td>
         <td *ngSwitchDefault class="text-truncate">
           <span class="ui-column-title">{{ col.header | translate }}</span>

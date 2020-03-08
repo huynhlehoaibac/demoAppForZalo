@@ -7,23 +7,6 @@
       <p-dropdown (onChange)="useLanguage($event)" [options]="langs" [(ngModel)]="currentLang" styleClass="lang mr-2">
       </p-dropdown>
     </li>
-    <!-- <button class="btn btn-link px-0">
-      <i class="c-icon icon-info"></i>
-      <span *ngIf="!mobileQuery.matches" class="ml-1" translate>Manual</span>
-    </button> -->
-    <li>
-      <ng-container [ngSwitch]="!!authenticationUser.bycnId">
-        <a *ngSwitchCase="true" href="https://itbox.bouygues-construction.com/incident.php?CI=portail%20partenaires"
-          target="_blank" rel="noopener" class="btn btn-link px-0 mx-2">
-          <i class="c-icon icon-question"></i>
-          <span *ngIf="!mobileQuery.matches" class="ml-1" translate>Incident</span>
-        </a>
-        <!-- <button *ngSwitchDefault (click)="onShowIncidentDialog()" class="btn btn-link px-0">
-        <i class="c-icon icon-question"></i>
-        <span *ngIf="!mobileQuery.matches" class="ml-1" translate>Incident</span>
-      </button> -->
-      </ng-container>
-    </li>
     <li>
       <button (click)="onShowUpdateAccountDialog()" class="btn btn-link px-0 mx-2">
         <i class="c-icon cil-user"></i>
@@ -50,30 +33,13 @@
       <app-breadcrumb>
         <li class="breadcrumb-menu">
           <ng-container [ngSwitch]="activatedComponent">
-            <ng-container *ngSwitchCase="'ServicexComponent'">
-              <ng-container
-                *ngIf="['SERVICE_MANAGING_ADMIN', 'APPLICATION_MANAGING_ADMIN', 'GENERAL_ADMIN'].includes(authenticationUser.highestUserRole)">
-                <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
-                  [title]="'Create a new service' | translate" class="clr clr-sm ml-2"></button>
-                <button (click)="export()" pButton type="button" icon="c-icon cil-cloud-download"
-                  [label]="'Export' | translate"
-                  [title]="'Export the list of services and their billing information' | translate"
-                  class="clr clr-sm ml-2"></button>
-              </ng-container>
-            </ng-container>
-            <ng-container *ngSwitchCase="'UserComponent'">
-              <ng-container
-                *ngIf="['SERVICE_ADMIN', 'SERVICE_MANAGING_ADMIN', 'APPLICATION_MANAGING_ADMIN', 'GENERAL_ADMIN'].includes(authenticationUser.highestUserRole)">
-                <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
-                  [title]="'Create a new user' | translate" class="clr clr-sm ml-2"></button>
-              </ng-container>
-            </ng-container>
-            <ng-container *ngSwitchCase="'MessageComponent'">
-              <ng-container
-                *ngIf="['APPLICATION_MANAGING_ADMIN', 'GENERAL_ADMIN'].includes(authenticationUser.highestUserRole)">
-                <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
-                  [title]="'Create a new message' | translate" class="clr clr-sm ml-2"></button>
-              </ng-container>
+            <ng-container *ngSwitchCase="'CustomerComponent'">
+              <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
+                [title]="'Create a new service' | translate" class="clr clr-sm ml-2"></button>
+              <button (click)="export()" pButton type="button" icon="c-icon cil-cloud-download"
+                [label]="'Export' | translate"
+                [title]="'Export the list of services and their billing information' | translate"
+                class="clr clr-sm ml-2"></button>
             </ng-container>
           </ng-container>
         </li>
