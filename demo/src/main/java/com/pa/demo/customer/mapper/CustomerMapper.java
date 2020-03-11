@@ -18,14 +18,13 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO> {
 
     // @formatter:off
     return Customer.builder()
-        .customerId(source.getCustomerId())
         .customerName(source.getCustomerName())
         .customerType(source.getCustomerType())
         .balance(source.getBalance())
         .phone(source.getPhone())
         .email(source.getEmail())
         .address(source.getAddress())
-        .status(source.isStatus())
+        .status(source.getStatus())
         .accountNumber(source.getAccountNumber())
         .gender(source.getGender())
         .updateDate(source.getUpdateDate())
@@ -43,13 +42,14 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO> {
 
     // @formatter:off
     return CustomerDTO.builder()
+        .customerId(source.getCustomerId())
         .customerName(source.getCustomerName())
         .customerType(source.getCustomerType())
         .balance(source.getBalance())
         .phone(source.getPhone())
         .email(source.getEmail())
         .address(source.getAddress())
-        .status(source.isStatus())
+        .status(source.getStatus())
         .accountNumber(source.getAccountNumber())
         .gender(source.getGender())
         .build();

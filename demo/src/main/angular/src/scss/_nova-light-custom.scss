@@ -306,6 +306,7 @@ body .ui-dialog .ui-dialog-titlebar {
   .ui-dialog-titlebar-icon {
     font-size: 18px;
     outline: none;
+    float: right;
 
     .pi {
       @extend .c-icons-free;

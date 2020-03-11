@@ -1,0 +1,156 @@
+<form #f="ngForm" [formGroup]="form" (submit)="form.valid && onSubmit()" novalidate>
+  <div *ngIf="f.submitted && form.invalid" class="mb-3">
+    <p *ngFor="let error of form.errors | keyvalue" [ngSwitch]="error.key" class="mb-1 alert alert-danger">
+      <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+    </p>
+  </div>
+  <div class="form-group row">
+    <label for="customerName" class="col-sm-4 col-form-label">{{ 'Name' | translate }} (*)</label>
+    <div class="col-sm-8">
+      <input formControlName="customerName" pInputText id="customerName" name="customerName" type="text"
+        class="form-control" appAutofocus />
+    </div>
+    <div *ngIf="f.submitted && form.get('customerName').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('customerName').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'required'">
+          {{ 'This field is required.' | translate }}
+        </ng-container>
+        <ng-container *ngSwitchCase="'maxlength'">
+          {{ 'This field must be no more than \{\{maxlength\}\} characters long.' | translate: {'maxlength': error.value.requiredLength} }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="customerType" class="col-sm-4 col-form-label">{{ 'Type' | translate }} (*)</label>
+    <div class="col-sm-8">
+      <p-dropdown formControlName="customerType" [options]="customerTypes" appendTo="body" inputId="customerType"
+        name="customerType">
+      </p-dropdown>
+    </div>
+    <div *ngIf="f.submitted && form.get('customerType').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('customerType').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'required'">
+          {{ 'This field is required.' | translate }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="balance" class="col-sm-4 col-form-label">{{ 'Balance' | translate }}</label>
+    <div class="col-sm-8">
+      <input formControlName="balance" pInputText id="balance" name="balance" type="text" class="form-control" />
+    </div>
+    <div *ngIf="f.submitted && form.get('balance').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('balance').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'pattern'">
+          {{ 'This field must be a number with maximum of \{\{integer\}\} digits and \{\{fraction\}\} decimal places.' | translate: {'integer': 14, 'fraction': 2} }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="phone" class="col-sm-4 col-form-label">{{ 'Phone' | translate }} (*)</label>
+    <div class="col-sm-8">
+      <input formControlName="phone" pInputText id="phone" name="phone" type="text" class="form-control" />
+    </div>
+    <div *ngIf="f.submitted && form.get('phone').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('phone').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'required'">
+          {{ 'This field is required.' | translate }}
+        </ng-container>
+        <ng-container *ngSwitchCase="'maxlength'">
+          {{ 'This field must be no more than \{\{maxlength\}\} characters long.' | translate: {'maxlength': error.value.requiredLength} }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="email" class="col-sm-4 col-form-label">{{ 'Email' | translate }}</label>
+    <div class="col-sm-8">
+      <input formControlName="email" pInputText id="email" name="email" type="text" class="form-control" />
+    </div>
+    <div *ngIf="f.submitted && form.get('email').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('email').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'maxlength'">
+          {{ 'This field must be no more than \{\{maxlength\}\} characters long.' | translate: {'maxlength': error.value.requiredLength} }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="address" class="col-sm-4 col-form-label">{{ 'Address' | translate }}</label>
+    <div class="col-sm-8">
+      <input formControlName="address" pInputText id="address" name="address" type="text" class="form-control" />
+    </div>
+    <div *ngIf="f.submitted && form.get('address').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('address').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'maxlength'">
+          {{ 'This field must be no more than \{\{maxlength\}\} characters long.' | translate: {'maxlength': error.value.requiredLength} }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="status" class="col-sm-4 col-form-label">{{ 'Status' | translate }}</label>
+    <div class="col-sm-8">
+      <p-dropdown formControlName="status" [options]="statuses" appendTo="body" inputId="status" name="status">
+      </p-dropdown>
+    </div>
+    <div *ngIf="f.submitted && form.get('status').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('status').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="accountNumber" class="col-sm-4 col-form-label">{{ 'Account No' | translate }}</label>
+    <div class="col-sm-8">
+      <input formControlName="accountNumber" pInputText id="accountNumber" name="accountNumber" type="text"
+        class="form-control" />
+    </div>
+    <div *ngIf="f.submitted && form.get('accountNumber').errors" class="offset-sm-4 col-sm-8">
+      <p *ngFor="let error of form.get('accountNumber').errors | keyvalue" [ngSwitch]="error.key"
+        class="mt-1 mb-0 alert alert-danger">
+        <ng-container *ngSwitchCase="'maxlength'">
+          {{ 'This field must be no more than \{\{maxlength\}\} characters long.' | translate: {'maxlength': error.value.requiredLength} }}
+        </ng-container>
+        <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+      </p>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="gender" class="col-sm-4 col-form-label">{{ 'Gender' | translate }}</label>
+    <div class="col-sm-8">
+      <p-dropdown formControlName="gender" [options]="genders" appendTo="body" inputId="gender" name="gender">
+      </p-dropdown>
+      <div *ngIf="f.submitted && form.get('status').errors" class="offset-sm-4 col-sm-8">
+        <p *ngFor="let error of form.get('status').errors | keyvalue" [ngSwitch]="error.key"
+          class="mt-1 mb-0 alert alert-danger">
+          <ng-container *ngSwitchDefault>{{ error.value }}</ng-container>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer d-flex flex-column flex-sm-row justify-content-sm-end">
+    <button pButton (click)="onClose()" type="button" [label]="'Cancel' | translate" icon="c-icon cil-account-logout"
+      class="clr mb-2 mb-sm-0 mr-0 mr-sm-2">
+    </button>
+    <button pButton [disabled]="f.submitted && !form.valid" type="submit" [label]="'Save' | translate"
+      icon="c-icon cil-check-alt" class="clr ui-button-primary">
+    </button>
+  </div>
+</form>

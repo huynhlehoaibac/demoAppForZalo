@@ -1,8 +1,6 @@
-package com.pa.demo.customer.dto;
+package com.pa.demo.customer.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,18 +13,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CustomerDTO {
+public class SearchCustomerModel {
 
-	int customerId;
-	String customerName;
-	String customerType;
-	BigDecimal balance;
-	String phone;
-	String email;
-	String address;
-	Boolean status;
-	String accountNumber;
-	String gender;
-	Date updateDate;
-	Date insertDate;
+  String customerName;
+  String customerType;
+  BigDecimal balance;
+  String phone;
+  String email;
+  String address;
+  Boolean status;
+  String accountNumber;
+  String gender;
 }

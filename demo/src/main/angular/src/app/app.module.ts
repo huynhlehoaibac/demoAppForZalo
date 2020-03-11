@@ -1,7 +1,12 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import {
   AppAsideModule,
@@ -28,6 +33,7 @@ import { AppComponent } from './app.component';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
 import { GuestLayoutComponent } from './layout/guest-layout/guest-layout.component';
+import { LoaderInterceptor } from './shared/interceptor/loader-interceptor';
 import { JwtConfig, jwtOptionsFactory } from './shared/jwt.config';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -43,6 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent, AuthorizedLayoutComponent, GuestLayoutComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -79,6 +86,11 @@ export function createTranslateLoader(http: HttpClient) {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
     },
     DialogService,
     ConfirmationService,

@@ -1,6 +1,6 @@
 <app-header [navbarBrandRouterLink]="['/']" [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 80, height: 40, alt: 'BYCN Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.svg', width: 30, height: 30, alt: 'BYCN Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 80, height: 40, alt: 'Demo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo_30-30.png', width: 30, height: 30, alt: 'Demo'}"
   [sidebarToggler]="'lg'" [asideMenuToggler]="false" [mobileAsideMenuToggler]="false">
   <ul class="nav navbar-nav ml-auto mr-2">
     <li>
@@ -8,10 +8,9 @@
       </p-dropdown>
     </li>
     <li>
-      <button (click)="onShowUpdateAccountDialog()" class="btn btn-link px-0 mx-2">
+      <button class="btn btn-link px-0 mx-2">
         <i class="c-icon cil-user"></i>
-        <span *ngIf="!mobileQuery.matches" class="ml-1">{{ authenticationUser.lastname }}
-          {{ authenticationUser.firstname }}</span>
+        <span *ngIf="!mobileQuery.matches" class="ml-1">{{ authenticationUser.name }}</span>
       </button>
     </li>
     <li>
@@ -35,10 +34,12 @@
           <ng-container [ngSwitch]="activatedComponent">
             <ng-container *ngSwitchCase="'CustomerComponent'">
               <button (click)="create()" pButton type="button" icon="c-icon cil-plus" [label]="'Create' | translate"
-                [title]="'Create a new service' | translate" class="clr clr-sm ml-2"></button>
-              <button (click)="export()" pButton type="button" icon="c-icon cil-cloud-download"
-                [label]="'Export' | translate"
-                [title]="'Export the list of services and their billing information' | translate"
+                [title]="'Create a new customer' | translate" class="clr clr-sm ml-2"></button>
+              <button (click)="export('xlsx')" pButton type="button" icon="c-icon cil-cloud-download"
+                [label]="'Export (.xlsx)' | translate" [title]="'Export the list of customers' | translate"
+                class="clr clr-sm ml-2"></button>
+              <button (click)="export('pdf')" pButton type="button" icon="c-icon cil-cloud-download"
+                [label]="'Export (.pdf)' | translate" [title]="'Export the list of customers' | translate"
                 class="clr clr-sm ml-2"></button>
             </ng-container>
           </ng-container>
@@ -53,8 +54,7 @@
 </div>
 <app-footer [fixed]="true">
   <div class="d-flex flex-grow-1 justify-content-between">
-    <a href="{{environment.serverUrl}}/terms-of-use" target="_blank" rel="noopener">{{ 'Terms of use' | translate }}</a>
-    <span title="{{environment.version}}"><a href="#">BCC Portal</a> &copy; 2019 BYCNIT.</span>
+    <span title="{{environment.version}}"><a href="#">DEMO</a> &copy; 2020 PA.</span>
   </div>
 </app-footer>
 <p-confirmDialog #cd icon="c-icon cil-warning">

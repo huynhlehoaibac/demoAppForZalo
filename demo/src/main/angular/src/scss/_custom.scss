@@ -119,21 +119,6 @@ body {
 }
 // Coreui -->
 
-// <!-- password-strength-meter
-.strength-meter::before {
-  left: calc(20% - 3px) !important;
-}
-
-.strength-meter::after {
-  right: calc(20% - 3px) !important;
-}
-
-.strength-meter::after,
-.strength-meter::before {
-  width: calc(20% + 6px) !important;
-}
-// password-strength-meter -->
-
 // <!-- Bootstrap 4 - Expand sizing utility classes
 $sizes: (
   20: 20%,

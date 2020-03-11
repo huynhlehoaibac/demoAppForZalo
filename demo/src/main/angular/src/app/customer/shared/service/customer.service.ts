@@ -23,26 +23,62 @@ export class CustomerService {
     _.forEach(event.multiSortMeta, ({ field, order }) => {
       params = params.append(
         'sort',
-        `${_.snakeCase(field)},${order === 1 ? 'asc' : 'desc'}`
+        `${field},${order === 1 ? 'asc' : 'desc'}`
       );
     });
-    params = params.append('sort', `${_.snakeCase('customerId')},asc`);
+    params = params.append('sort', 'customerId,asc');
 
     return this.http.get(`${environment.apiUrl}/customers`, {
       params
     });
   }
 
+  exportCustomers(
+    event: LazyLoadEvent,
+    displayedColumns: string[],
+    fileType: string
+  ) {
+    const headers = new HttpHeaders({ Accept: 'application/octet-stream' });
+
+    let params = new HttpParams();
+    // Set filters data.
+    _.forOwn(event.filters, (filterMetaData, field) => {
+      params = params.append(field, filterMetaData.value);
+    });
+
+    _.forEach(event.multiSortMeta, ({ field, order }) => {
+      params = params.append(
+        'sort',
+        `${field},${order === 1 ? 'asc' : 'desc'}`
+      );
+    });
+    params = params.append('sort', 'customerId,asc');
+
+    _.forEach(displayedColumns, ({ field }) => {
+      params = params.append('displayedColumnFields', field);
+    });
+
+    params = params.append('fileType', fileType);
+
+    return this.http.get(`${environment.apiUrl}/customers`, {
+      headers,
+      params,
+      observe: 'response',
+      responseType: 'blob'
+    });
+  }
+
+  getCustomer(customerId: any): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/customers/${customerId}`);
+  }
+
   createCustomer(customer: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/customers/create-customer`,
-      customer
-    );
+    return this.http.post(`${environment.apiUrl}/customers`, customer);
   }
 
   updateCustomer(customerId: number, customer: any): Observable<any> {
     return this.http.patch(
-      `${environment.apiUrl}/customers/${customerId}/update-customer`,
+      `${environment.apiUrl}/customers/${customerId}`,
       customer
     );
   }
@@ -53,8 +89,10 @@ export class CustomerService {
 
   getCustomerTypes(): SelectItem[] {
     const items = [];
-    items.push({ value: 1, label: 'Internal' });
-    items.push({ value: 0, label: 'External' });
+    items.push({ value: 'A', label: 'Vip' });
+    items.push({ value: 'B', label: 'Regular' });
+    items.push({ value: 'C', label: 'Standard' });
+    items.push({ value: 'D', label: 'New' });
     return items;
   }
 
@@ -65,20 +103,10 @@ export class CustomerService {
     return items;
   }
 
-  getCustomerRoles(): SelectItem[] {
+  getGenders(): SelectItem[] {
     const items = [];
-    items.push({ value: 'PARTNER', label: 'Partner' });
-    items.push({ value: 'STANDARD_CUSTOMER', label: 'Standard customer' });
-    items.push({ value: 'SERVICE_ADMIN', label: 'Service admin' });
-    items.push({
-      value: 'SERVICE_MANAGING_ADMIN',
-      label: 'Service managing admin'
-    });
-    items.push({
-      value: 'APPLICATION_MANAGING_ADMIN',
-      label: 'Application managing admin'
-    });
-    items.push({ value: 'GENERAL_ADMIN', label: 'General admin' });
+    items.push({ value: 'M', label: 'Male' });
+    items.push({ value: 'F', label: 'Female' });
     return items;
   }
 }

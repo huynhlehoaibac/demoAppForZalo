@@ -22,150 +22,149 @@ import lombok.Builder;
 @Entity
 @Table(name = "customer")
 public class Customer implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private int customerId;
-	private String customerName;
-	private String customerType;
-	private BigDecimal balance;
-	private String phone;
-	private String email;
-	private String address;
-	private boolean status;
-	private String accountNumber;
-	private String gender;
-	private Date updateDate;
-	private Date insertDate;
+  private int customerId;
+  private String customerName;
+  private String customerType;
+  private BigDecimal balance;
+  private String phone;
+  private String email;
+  private String address;
+  private Boolean status;
+  private String accountNumber;
+  private String gender;
+  private Date updateDate;
+  private Date insertDate;
 
-	public Customer() {
-	}
+  public Customer() {}
 
-	public Customer(int customerId, String customerName, String customerType, BigDecimal balance, String phone,
-			String email, String address, boolean status, String accountNumber, String gender, Date updateDate,
-			Date insertDate) {
-		this.customerName = customerName;
-		this.customerType = customerType;
-		this.balance = balance;
-		this.phone = phone;
-		this.email = email;
-		this.address = address;
-		this.status = status;
-		this.accountNumber = accountNumber;
-		this.gender = gender;
-		this.updateDate = updateDate;
-		this.insertDate = insertDate;
-	}
+  public Customer(int customerId, String customerName, String customerType, BigDecimal balance,
+      String phone, String email, String address, boolean status, String accountNumber,
+      String gender, Date updateDate, Date insertDate) {
+    this.customerName = customerName;
+    this.customerType = customerType;
+    this.balance = balance;
+    this.phone = phone;
+    this.email = email;
+    this.address = address;
+    this.status = status;
+    this.accountNumber = accountNumber;
+    this.gender = gender;
+    this.updateDate = updateDate;
+    this.insertDate = insertDate;
+  }
 
-	@Id
+  @Id
 
-	@Column(name = "customer_id", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int getcustomerId() {
-		return this.customerId;
-	}
+  @Column(name = "customer_id", unique = true, nullable = false)
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getCustomerId() {
+    return this.customerId;
+  }
 
-	public void setcustomerId(int customerId) {
-		this.customerId = customerId;
-	}
+  public void setCustomerId(int customerId) {
+    this.customerId = customerId;
+  }
 
-	@Column(name = "customerName", nullable = false)
-	public String getCustomerName() {
-		return this.customerName;
-	}
+  @Column(name = "customer_name", nullable = false)
+  public String getCustomerName() {
+    return this.customerName;
+  }
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
+  public void setCustomerName(String customerName) {
+    this.customerName = customerName;
+  }
 
-	@Column(name = "customerType", nullable = false)
-	public String getCustomerType() {
-		return this.customerType;
-	}
+  @Column(name = "customer_type", nullable = false)
+  public String getCustomerType() {
+    return this.customerType;
+  }
 
-	public void setCustomerType(String customerType) {
-		this.customerType = customerType;
-	}
+  public void setCustomerType(String customerType) {
+    this.customerType = customerType;
+  }
 
-	@Column(name = "balance", nullable = false)
-	public BigDecimal getBalance() {
-		return this.balance;
-	}
+  @Column(name = "balance")
+  public BigDecimal getBalance() {
+    return this.balance;
+  }
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
-	}
+  public void setBalance(BigDecimal balance) {
+    this.balance = balance;
+  }
 
-	@Column(name = "phone", nullable = false)
-	public String getPhone() {
-		return this.phone;
-	}
+  @Column(name = "phone", nullable = false)
+  public String getPhone() {
+    return this.phone;
+  }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
 
-	@Column(name = "email", nullable = false)
-	public String getEmail() {
-		return this.email;
-	}
+  @Column(name = "email", nullable = false)
+  public String getEmail() {
+    return this.email;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	@Column(name = "address")
-	public String getAddress() {
-		return this.address;
-	}
+  @Column(name = "address")
+  public String getAddress() {
+    return this.address;
+  }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-	@Column(name = "status", nullable = false)
-	public boolean isStatus() {
-		return this.status;
-	}
+  @Column(name = "status")
+  public Boolean getStatus() {
+    return this.status;
+  }
 
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
 
-	@Column(name = "accountnumber")
-	public String getAccountNumber() {
-		return this.accountNumber;
-	}
+  @Column(name = "account_number")
+  public String getAccountNumber() {
+    return this.accountNumber;
+  }
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
+  public void setAccountNumber(String accountNumber) {
+    this.accountNumber = accountNumber;
+  }
 
-	@Column(name = "gender")
-	public String getGender() {
-		return this.gender;
-	}
+  @Column(name = "gender")
+  public String getGender() {
+    return this.gender;
+  }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "update_date", length = 29)
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "update_date", length = 29)
+  public Date getUpdateDate() {
+    return this.updateDate;
+  }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+  public void setUpdateDate(Date updateDate) {
+    this.updateDate = updateDate;
+  }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "insert_date", nullable = false, length = 29)
-	public Date getInsertDate() {
-		return this.insertDate;
-	}
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "insert_date", nullable = false, length = 29)
+  public Date getInsertDate() {
+    return this.insertDate;
+  }
 
-	public void setInsertDate(Date insertDate) {
-		this.insertDate = insertDate;
-	}
+  public void setInsertDate(Date insertDate) {
+    this.insertDate = insertDate;
+  }
 }

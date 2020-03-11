@@ -1,14 +1,32 @@
-<p-table #dt [columns]="cols" [value]="customers" [lazy]="true" (onLazyLoad)="loadLazy($event)" [lazyLoadOnInit]="false"
-  sortMode="multiple" [multiSortMeta]="defaultMultiSortMeta" [paginator]="true" [rowsPerPageOptions]="[10, 20, 50]"
-  [rows]="10" paginatorDropdownAppendTo="body" [totalRecords]="totalRecords" [responsive]="true" styleClass="mb-4">
+<p-table #dt [columns]="displayedColumns" [value]="customers" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+  [lazyLoadOnInit]="false" sortMode="multiple" [multiSortMeta]="defaultMultiSortMeta" [paginator]="true"
+  [rowsPerPageOptions]="[10, 20, 50]" [rows]="10" paginatorDropdownAppendTo="body" [totalRecords]="totalRecords"
+  [responsive]="true" styleClass="mb-4" [scrollable]="true" [style]="{width: '100%'}">
+  <ng-template pTemplate="caption">
+    <div class="ui-helper-clearfix">
+      <div class="float-left" style="padding: 6px 0;">
+        <button (click)="onResetTable()" pButton type="button" icon="c-icon fas fa-eraser"
+          [label]="'Reset filters' | translate" [title]="'Reset filters' | translate" class="clr clr-sm mr-2"></button>
+        <button (click)="onShowCustomerChartDialog(customers)" pButton type="button" icon="c-icon cil-chart-pie"
+          [label]="'Show customer chart by type' | translate" [title]="'Show customer chart by type' | translate"
+          class="clr clr-sm mr-2"></button>
+      </div>
+      <div class="float-right">
+        <p-multiSelect [options]="cols" [ngModel]="displayedColumns" (ngModelChange)="onDisplayedColumnsChange($event)"
+          optionLabel="header" selectedItemsLabel="{0} columns are displayed" [style]="{minWidth: '200px'}"
+          defaultLabel="Choose Columns" appendTo="body" [style]="{'height': '35px', 'float': 'left'}">
+        </p-multiSelect>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="colgroup" let-columns>
+    <colgroup>
+      <col *ngFor="let col of columns" [style]="{width: col.width}">
+    </colgroup>
+  </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
       <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
-        <th *ngSwitchCase="'filter'" rowspan="2" class="p-0 text-40em-center" [width]="col.width">
-          <button (click)="onResetTable()" [title]="'Reset filters' | translate" class="btn">
-            <span class="c-icon fas fa-eraser"></span>
-          </button>
-        </th>
         <th *ngSwitchDefault [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.sortableColumnDisabled"
           [attr.rowspan]="col.rowspan" class="text-40em-center" [width]="col.width">
           {{ col.header | translate }}
@@ -20,35 +38,48 @@
       <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
         <ng-container *ngSwitchCase="'filter'">
         </ng-container>
-        <th *ngSwitchCase="'lastname'">
+        <th *ngSwitchCase="'customerName'">
           <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-            [(ngModel)]="inputtedLastname">
-        </th>
-        <th *ngSwitchCase="'firstname'">
-          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-            [(ngModel)]="inputtedFirstname">
-        </th>
-        <th *ngSwitchCase="'companyName'">
-          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-            [(ngModel)]="inputtedCompanyName">
-        </th>
-        <th *ngSwitchCase="'emailAddress'">
-          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-            [(ngModel)]="inputtedEmailAddress">
+            [(ngModel)]="inputtedCustomerName">
         </th>
         <th *ngSwitchCase="'customerType'">
           <p-dropdown [options]="customerTypes" (onChange)="dt.filter($event.value, col.field, 'equals')"
             [(ngModel)]="selectedCustomerType" appendTo="body">
           </p-dropdown>
         </th>
-        <th *ngSwitchCase="'active'">
+        <th *ngSwitchCase="'balance'">
+          > {{ inputtedBalance | number }}
+          <i class="pi pi-times" (click)="inputtedBalance=null;dt.filter(null, col.field, col.filterMatchMode)"
+            style="cursor:pointer" *ngIf="inputtedBalance"></i>
+          <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="inputtedBalance" [min]="0"
+            [max]="1000000000" (onChange)="onBalanceChange($event, dt)"></p-slider>
+        </th>
+        <ng-container *ngSwitchCase="'balance'">
+        </ng-container>
+        <th *ngSwitchCase="'phone'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedPhone">
+        </th>
+        <th *ngSwitchCase="'email'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedEmail">
+        </th>
+        <th *ngSwitchCase="'address'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedAddress">
+        </th>
+        <th *ngSwitchCase="'status'">
           <p-dropdown [options]="statuses" (onChange)="dt.filter($event.value, col.field, 'equals')"
             [(ngModel)]="selectedStatus" appendTo="body">
           </p-dropdown>
         </th>
-        <th *ngSwitchCase="'highestCustomerRole'">
-          <p-dropdown [options]="customerRoles" (onChange)="dt.filter($event.value, col.field, 'equals')"
-            [(ngModel)]="selectedCustomerRole" scrollHeight="217px" appendTo="body">
+        <th *ngSwitchCase="'accountNumber'">
+          <input pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+            [(ngModel)]="inputtedAccountNumber">
+        </th>
+        <th *ngSwitchCase="'gender'">
+          <p-dropdown [options]="genders" (onChange)="dt.filter($event.value, col.field, 'equals')"
+            [(ngModel)]="selectedGender" appendTo="body">
           </p-dropdown>
         </th>
         <ng-container *ngSwitchCase="'action'">
@@ -63,28 +94,9 @@
     <tr>
       <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
         <td *ngSwitchCase="'filter'" class="d-40em-down-none"></td>
-        <td *ngSwitchCase="'lastname'" class="text-truncate">
-          <span class="ui-column-title">{{ col.header | translate }}</span>
-          <a (click)="onShowUpdateCustomerDialog(rowData)" [title]="rowData[col.field]"
-            href="javascript:void(0)">{{ rowData[col.field] }}</a>
-        </td>
-        <td *ngSwitchCase="'firstname'" class="text-truncate">
-          <span class="ui-column-title">{{ col.header | translate }}</span>
-          <a (click)="onShowUpdateCustomerDialog(rowData)" [title]="rowData[col.field]"
-            href="javascript:void(0)">{{ rowData[col.field] }}</a>
-        </td>
-        <td *ngSwitchCase="'emailAddress'" class="text-truncate">
+        <td *ngSwitchCase="'customerName'" class="text-truncate">
           <span class="ui-column-title">{{ col.header | translate }}</span>
           <span [title]="rowData[col.field]">{{ rowData[col.field] }}</span>
-        </td>
-        <td *ngSwitchCase="'customerType'" class="text-truncate">
-          <span class="ui-column-title">{{ col.header | translate }}</span>
-          <ng-container [ngSwitch]="rowData[col.field]">
-            <ng-container *ngSwitchCase="1"><span class="badge badge-primary">{{ 'Internal' |  translate }}</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="0"><span class="badge badge-warning">{{ 'External' |  translate }}</span>
-            </ng-container>
-          </ng-container>
         </td>
         <td *ngSwitchCase="'customerType'" class="text-truncate">
           <span class="ui-column-title">{{ col.header | translate }}</span>
@@ -95,9 +107,34 @@
             <span *ngSwitchCase="'D'" [title]="'New' | translate" [innerText]="'New' | translate">
             </span>
           </ng-container>
+        <td *ngSwitchCase="'balance'" class="text-truncate text-right">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <span [title]="rowData[col.field]">{{ rowData[col.field] | number:'1.2-2' }}</span>
+        </td>
+        <td *ngSwitchCase="'status'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <ng-container [ngSwitch]="rowData[col.field]">
+            <ng-container *ngSwitchCase="true"><span class="badge badge-primary">{{ 'Active' |  translate }}</span>
+            </ng-container>
+            <ng-container *ngSwitchCase="false"><span class="badge badge-warning">{{ 'Blocked' |  translate }}</span>
+            </ng-container>
+          </ng-container>
+        </td>
+        <td *ngSwitchCase="'gender'" class="text-truncate">
+          <span class="ui-column-title">{{ col.header | translate }}</span>
+          <ng-container [ngSwitch]="rowData[col.field]">
+            <span *ngSwitchCase="'M'" [title]="'Male' | translate" [innerText]="'Male' | translate"></span>
+            <span *ngSwitchCase="'F'" [title]="'Female' | translate" [innerText]="'Female' | translate"></span>
+          </ng-container>
         </td>
         <td *ngSwitchCase="'action'" class="text-40em-right">
           <span class="ui-column-title">{{ col.header | translate }}</span>
+          <span class="divider">
+            <button (click)="onShowUpdateCustomerDialog(rowData)" [title]="'Update the service' | translate"
+              class="btn btn-icon btn-icon-primary">
+              <i class="c-icon cil-pencil"></i>
+            </button>
+          </span>
           <span class="divider">
             <button (click)="onDeleteCustomer(rowData)" [title]="'Delete the customer' | translate"
               class="btn btn-icon btn-icon-danger">

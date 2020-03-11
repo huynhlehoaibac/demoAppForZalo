@@ -1,8 +1,8 @@
 <app-header [navbarBrandRouterLink]="['/']" [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 80, height: 40, alt: 'BYCN Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.svg', width: 30, height: 30, alt: 'BYCN Logo'}"
-  [navbarBrandText]="'Bouygues Construction Connect'" [sidebarToggler]="false" [mobileSidebarToggler]="false"
-  [asideMenuToggler]="false" [mobileAsideMenuToggler]="false">
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 80, height: 40, alt: 'Demo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.svg', width: 30, height: 30, alt: 'Demo'}"
+  [navbarBrandText]="'Demo'" [sidebarToggler]="false" [mobileSidebarToggler]="false" [asideMenuToggler]="false"
+  [mobileAsideMenuToggler]="false">
   <ul class="nav navbar-nav ml-auto">
     <p-dropdown (onChange)="useLanguage($event)" [options]="langs" [(ngModel)]="currentLang" styleClass="lang mr-2">
     </p-dropdown>
@@ -16,6 +16,6 @@
     </div>
   </main>
 </div>
-<p-toast></p-toast>
+<p-toast position="bottom-right"></p-toast>
 <ngx-spinner bdColor="rgba(151,151,151,0.2)" size="default" color="rgba(232,91,44,0.9)" type="ball-8bits"
   [fullScreen]="true"></ngx-spinner>

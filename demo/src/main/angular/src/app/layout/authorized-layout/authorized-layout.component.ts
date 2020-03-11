@@ -148,8 +148,8 @@ export class AuthorizedLayoutComponent implements OnInit, OnDestroy {
     this.notifier.notify(new BreadcrumCreateButtonClickEvent());
   }
 
-  export() {
-    this.notifier.notify(new BreadcrumExportButtonClickEvent());
+  export(fileType: string) {
+    this.notifier.notify(new BreadcrumExportButtonClickEvent(fileType));
   }
 
   onActive(componentRef: Component) {
