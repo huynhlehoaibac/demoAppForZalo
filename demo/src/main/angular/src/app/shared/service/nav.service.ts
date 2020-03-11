@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { INavData } from '@coreui/angular';
 import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -16,10 +17,11 @@ export class NavService {
   ) {}
 
   ready(): Observable<Array<INavData>> {
+    const cloned = _.cloneDeep(navItems);
     return this.translate.get('All').pipe(
       map(() => {
-        this.translateNavData(navItems);
-        return navItems;
+        this.translateNavData(cloned);
+        return cloned;
       })
     );
   }

@@ -6,6 +6,7 @@
   "All": "Tất cả",
   "Balance": "Số dư",
   "Blocked": "Khoá",
+  "Cancel": "Huỷ",
   "Create": "Tạo",
   "Create a new customer": "Tạo mới khách hàng",
   "Customer": "Khách hàng",
@@ -39,5 +40,7 @@
   "This field must be no more than {{maxlength}} characters long.": "Trường này không đuộc vượt quá {{maxlength}} ký tự.",
   "Type": "Loại",
   "Vip": "VIP",
-  "Yes": "Có"
+  "Yes": "Có",
+  "Delete the customer": "Xoá người dùng",
+  "Update the customer": "Cập nhật thông tin người dùng"
 }

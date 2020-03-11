@@ -6,6 +6,7 @@
   "All": "All",
   "Balance": "Balance",
   "Blocked": "Blocked",
+  "Cancel": "Cancel",
   "Create": "Create",
   "Create a new customer": "Create a new customer",
   "Customer": "Customer",
@@ -39,5 +40,7 @@
   "This field must be no more than {{maxlength}} characters long.": "This field must be no more than {{maxlength}} characters long.",
   "Type": "Type",
   "Vip": "Vip",
-  "Yes": "Yes"
+  "Yes": "Yes",
+  "Delete the customer": "Delete the customer",
+  "Update the customer": "Update the customer"
 }

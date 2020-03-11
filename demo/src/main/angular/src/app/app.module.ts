@@ -39,6 +39,8 @@ import {
   TokenInterceptor
 } from './shared/interceptor';
 import { JwtConfig, jwtOptionsFactory } from './shared/jwt.config';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: false
@@ -84,7 +86,8 @@ export function createTranslateLoader(http: HttpClient) {
     ButtonModule,
     DropdownModule,
     ToastModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {
