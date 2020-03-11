@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.oauth2.client.endpoint;
 
 import java.net.URI;
 import org.springframework.core.convert.converter.Converter;

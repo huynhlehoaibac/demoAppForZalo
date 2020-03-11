@@ -8,7 +8,7 @@
         <button (click)="onResetTable()" pButton type="button" icon="c-icon fas fa-eraser"
           [label]="'Reset filters' | translate" [title]="'Reset filters' | translate" class="clr clr-sm mr-2"></button>
         <button (click)="onShowCustomerChartDialog(customers)" pButton type="button" icon="c-icon cil-chart-pie"
-          [label]="'Show customer chart by type' | translate" [title]="'Show customer chart by type' | translate"
+          [label]="'Customer chart by type' | translate" [title]="'Customer chart by type' | translate"
           class="clr clr-sm mr-2"></button>
       </div>
       <div class="float-right">
@@ -130,7 +130,7 @@
         <td *ngSwitchCase="'action'" class="text-40em-right">
           <span class="ui-column-title">{{ col.header | translate }}</span>
           <span class="divider">
-            <button (click)="onShowUpdateCustomerDialog(rowData)" [title]="'Update the service' | translate"
+            <button (click)="onShowUpdateCustomerDialog(rowData)" [title]="'Update the customer' | translate"
               class="btn btn-icon btn-icon-primary">
               <i class="c-icon cil-pencil"></i>
             </button>

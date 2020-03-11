@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.web.authentication;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

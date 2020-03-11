@@ -23,12 +23,16 @@ import com.pa.demo.security.authentication.JwtAuthenticationProvider;
 import com.pa.demo.security.authentication.JwtHeaderTokenExtractor;
 import com.pa.demo.security.authentication.RefreshTokenAuthenticationProvider;
 import com.pa.demo.security.authentication.RefreshTokenExtractor;
+import com.pa.demo.security.oauth2.client.endpoint.CustomAccessTokenResponseClient;
+import com.pa.demo.security.oauth2.client.userinfo.CustomOAuth2UserService;
+import com.pa.demo.security.oauth2.client.web.CustomOAuth2AuthorizationRequestResolver;
 import com.pa.demo.security.web.DefaultAuthenticationEntryPoint;
 import com.pa.demo.security.web.authentication.DefaultAuthenticationFailureHandler;
 import com.pa.demo.security.web.authentication.DefaultAuthenticationSuccessHandler;
 import com.pa.demo.security.web.authentication.ExchangeTokenAuthenticationProcessingFilter;
 import com.pa.demo.security.web.authentication.ExchangeTokenAuthenticationSuccessHandler;
 import com.pa.demo.security.web.authentication.JwtTokenAuthenticationProcessingFilter;
+import com.pa.demo.security.web.authentication.OAuth2AuthenticationSuccessHandler;
 import com.pa.demo.security.web.authentication.RefreshTokenAuthenticationProcessingFilter;
 
 @Configuration

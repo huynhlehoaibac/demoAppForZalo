@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.oauth2.client.web;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

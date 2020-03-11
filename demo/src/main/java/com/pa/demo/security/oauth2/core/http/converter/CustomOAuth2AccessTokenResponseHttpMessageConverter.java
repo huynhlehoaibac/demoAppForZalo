@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.oauth2.core.http.converter;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

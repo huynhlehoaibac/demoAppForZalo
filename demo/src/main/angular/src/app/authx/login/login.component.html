@@ -3,14 +3,14 @@
     <div class="card mb-0">
       <div class="card-body p-5">
         <form (ngSubmit)="onSubmit()" novalidate>
-          <h4 class="mb-5">{{ 'Identifier of connection' | translate }}</h4>
+          <h4 class="mb-5">{{ 'Login' | translate }}</h4>
           <div class="mb-5">
             <div class="text-muted">
-              {{ 'If you would like to create an account or if you have any connection problems, contact your correspondant in Bouygues Construction.' | translate }}
+              {{ 'Login with Zalo account. After click below button you will be navigated to Zalo page to authentication.' | translate }}
             </div>
           </div>
           <div class="text-right">
-            <button pButton type="submit" [label]="'Next' | translate" class="clr ui-button-primary"></button>
+            <button pButton type="submit" [label]="'Login' | translate" class="clr ui-button-primary"></button>
           </div>
         </form>
       </div>

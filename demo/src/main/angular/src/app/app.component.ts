@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private setDefaultLang() {
-    this.translate.addLangs(['en', 'fr', 'de']);
+    this.translate.addLangs(['vi', 'en']);
     const lang = localStorage.getItem('lang') || this.getBrowserLang() || 'fr';
 
     localStorage.setItem('lang', lang);

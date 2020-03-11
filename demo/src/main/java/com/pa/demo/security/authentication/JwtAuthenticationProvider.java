@@ -6,7 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-import com.pa.demo.security.config.JwtSettings;
 import com.pa.demo.security.core.userdetails.AuthenticationUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

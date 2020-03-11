@@ -7,7 +7,6 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import com.pa.demo.security.config.JwtSettings;
 import com.pa.demo.security.core.userdetails.AuthenticationUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

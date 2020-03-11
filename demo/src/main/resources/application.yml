@@ -8,6 +8,10 @@ spring:
    jpa:
       database-platform: org.hibernate.dialect.H2Dialect
 #       hibernate.ddl-auto: update
+   messages:
+      basename: app/messages
+      encoding: UTF-8
+      fallback-to-system-locale: false
    security.oauth2.client:
       registration.zalo:
          client-id: 3957546726206149895

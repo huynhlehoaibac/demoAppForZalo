@@ -33,7 +33,11 @@ import { AppComponent } from './app.component';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { AuthorizedLayoutComponent } from './layout/authorized-layout/authorized-layout.component';
 import { GuestLayoutComponent } from './layout/guest-layout/guest-layout.component';
-import { LoaderInterceptor } from './shared/interceptor/loader-interceptor';
+import {
+  LoaderInterceptor,
+  LocaleInterceptor,
+  TokenInterceptor
+} from './shared/interceptor';
 import { JwtConfig, jwtOptionsFactory } from './shared/jwt.config';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -86,6 +90,16 @@ export function createTranslateLoader(http: HttpClient) {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LocaleInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,

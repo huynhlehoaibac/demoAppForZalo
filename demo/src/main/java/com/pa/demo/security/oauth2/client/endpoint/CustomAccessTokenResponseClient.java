@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.oauth2.client.endpoint;
 
 import java.util.Arrays;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenRespon
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import com.pa.demo.security.oauth2.core.http.converter.CustomOAuth2AccessTokenResponseHttpMessageConverter;
 
 @Component
 public class CustomAccessTokenResponseClient

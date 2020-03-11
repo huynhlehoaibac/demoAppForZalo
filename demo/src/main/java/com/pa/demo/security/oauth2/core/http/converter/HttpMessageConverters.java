@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.oauth2.core.http.converter;
 
 import org.springframework.http.converter.GenericHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -11,6 +11,7 @@ import org.springframework.util.ClassUtils;
  * Utility methods for {@link HttpMessageConverter}'s.
  *
  * @author Joe Grandja
+ * @clone-by Hoai Bac
  * @since 5.1
  */
 final class HttpMessageConverters {

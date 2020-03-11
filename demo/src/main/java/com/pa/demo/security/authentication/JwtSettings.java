@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.authentication;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

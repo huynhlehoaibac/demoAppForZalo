@@ -1,4 +1,4 @@
-package com.pa.demo.security.config;
+package com.pa.demo.security.oauth2.client.userinfo;
 
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
 import java.net.URI;

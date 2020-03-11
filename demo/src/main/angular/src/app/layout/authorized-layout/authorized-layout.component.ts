@@ -123,27 +123,6 @@ export class AuthorizedLayoutComponent implements OnInit, OnDestroy {
     );
   }
 
-  onShowUpdateAccountDialog() {
-    // this.dialogService
-    //   .open(UpdateAccountComponent, {
-    //     header: this.translate.instant('My account'),
-    //     styleClass: 'w-lg-60 w-xl-40',
-    //     contentStyle: {
-    //       'max-height': 'calc(100vh - 105px - 50px - 30px)',
-    //       'overflow-y': 'auto',
-    //       'overflow-x': 'hidden'
-    //     }
-    //   })
-    //   .onClose.subscribe(result => {
-    //     if (result && result.hasChanges) {
-    //       this.authService.refreshToken().subscribe(token => {
-    //         this.authService.saveToken(token);
-    //         this.notifier.notify(new TokenRefreshEvent());
-    //       });
-    //     }
-    //   });
-  }
-
   create() {
     this.notifier.notify(new BreadcrumCreateButtonClickEvent());
   }
